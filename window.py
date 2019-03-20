@@ -14,6 +14,9 @@ class OSWindow(Gtk.Window):
         stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
         stack.set_transition_duration(1000)
 
+        fcfs = FCFS.window()
+        stack.add_titled(fcfs, "fcfs", "FCFS")
+
         stack_switcher = Gtk.StackSwitcher()
         stack_switcher.set_stack(stack)
         vbox.pack_start(stack_switcher, True, True, 0)
