@@ -1,3 +1,3 @@
 class Process:
-    def __init__(self, name, time):
+    def __init__(self, name, arrival, time):
         pass

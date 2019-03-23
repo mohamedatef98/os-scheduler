@@ -2,6 +2,6 @@ from .NormalProcess import NormalProcess
 
 class PriorityProcess(NormalProcess):
 
-    def __init__(self, name, time, priority):
-        NormalProcess.__init__(name, time)
+    def __init__(self, name, arrival, time, priority):
+        NormalProcess.__init__(name, arrival, time)
         self.priority = priority
