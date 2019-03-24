@@ -17,11 +17,8 @@ class OSWindow(Gtk.Window):
         stack.set_transition_duration(100)
 
 
-        label = Gtk.Label()
-        label.set_markup("<big>A fancy label</big>")
-        stack.add_titled(label, "label", "A label")
 
-        fcfs = FCFSMainWindow()
+        fcfs = FCFSMainWindow(self)
         stack.add_titled(fcfs, "fcfs", "FCFS")
 
         stack_switcher = Gtk.StackSwitcher()

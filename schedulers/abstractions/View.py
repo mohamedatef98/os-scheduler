@@ -6,17 +6,24 @@ from queue.queue import Queue
 from processes.NormalProcess import NormalProcess
 
 class MainWindow(Gtk.Grid):
-    def __init__(self):
+    def __init__(self, main_window):
         Gtk.Grid.__init__(self)
+        self.main_window = main_window
 
         self.queue = Queue()
 
         self.set_column_spacing(100)
 
-        self.results_box = Gtk.ListBox()
-        self.results_box.add(Gtk.Label('RESULTS GO HERE'))
+        results_box = Gtk.ListBox()
+        self.results_line = Gtk.ListBox()
+        results_box.add(self.results_line)
 
-        self.attach(self.results_box, 0, 0, 1, 1)
+        schedule_button = Gtk.Button('Schedule')
+        schedule_button.connect('clicked', self.schedule)
+
+        results_box.add(schedule_button)
+
+        self.attach(results_box, 0, 0, 1, 1)
 
         processes_box = Gtk.ListBox()
         self.process_lines = Gtk.ListBox()
@@ -35,7 +42,7 @@ class MainWindow(Gtk.Grid):
 
 
     def add_process_dialog(self, widget):
-        self.dialog = Gtk.Dialog('Add Process', None)
+        self.dialog = Gtk.Dialog('Add Process', self.main_window)
         dialog_main_window = self.dialog.get_content_area()
 
 
@@ -116,7 +123,11 @@ class MainWindow(Gtk.Grid):
             self.process_lines.show_all()
 
 
+    def schedule(self, widget):
+        pass
 
 
+    def draw_gantt(self, gantt_chart):
+        pass
 
 

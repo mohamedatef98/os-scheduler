@@ -7,11 +7,8 @@ class FCFSScheduler (Scheduler):
 
     def schedule(self):
         counter = 0
-        sorted_queue = sorted(self.queue.processes, key=lambda k: k['arrival_time'])
+        sorted_queue = sorted(self.queue.processes, key=lambda k: k.arrival)
         gantt_chart = Gantt_Chart()
-        while(sorted_queue.count() != 0):
-            counter += 1
-            if(counter - 1 == sorted_queue[0]['arrival_time']):
-                for i in range(sorted_queue[0]['process'].time):
-                    gantt_chart.add(sorted_queue[0])
-                sorted_queue.pop(0)
+        for queue_process in sorted_queue:
+            for i in range(queue_process.time):
+                gantt_chart.add(h  )
