@@ -9,6 +9,7 @@ class MainWindow(Gtk.Grid):
     def __init__(self, main_window):
         Gtk.Grid.__init__(self)
         self.main_window = main_window
+        self.set_column_homogeneous = True
 
         self.queue = Queue()
 
@@ -16,11 +17,13 @@ class MainWindow(Gtk.Grid):
 
         results_box = Gtk.ListBox()
         self.results_line = Gtk.ListBox()
+        results_box.set_border_width(4)
         results_box.add(self.results_line)
 
         schedule_button = Gtk.Button('Schedule')
         schedule_button.connect('clicked', self.schedule)
 
+        results_box.set_hexpand(True)
         results_box.add(schedule_button)
 
         self.attach(results_box, 0, 0, 1, 1)
@@ -31,6 +34,8 @@ class MainWindow(Gtk.Grid):
         add_process_button = Gtk.Button('Add Process')
         add_process_button.connect('clicked', self.add_process_dialog)
 
+        processes_box.set_hexpand(True)
+        processes_box.set_border_width(5)
         processes_box.add(add_process_button)
 
 
@@ -128,6 +133,16 @@ class MainWindow(Gtk.Grid):
 
 
     def draw_gantt(self, gantt_chart):
-        pass
+        for child in self.gantt_chart_box.get_children():
+            self.gantt_chart_box.remove(child)
+
+        for process in gantt_chart.chart:
+            l = 'X'
+            if process is not None:
+                l = process.name
+            l = Gtk.Button(l)
+            self.gantt_chart_box.add(l)
+            self.gantt_chart_box.show_all()
+
 
 
