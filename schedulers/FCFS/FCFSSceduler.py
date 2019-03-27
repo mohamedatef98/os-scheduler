@@ -10,7 +10,7 @@ class FCFSScheduler (Scheduler):
         sorted_queue_processes = sorted(self.queue.processes, key=lambda k: k.arrival)
         gantt_chart = Gantt_Chart()
         while len(sorted_queue_processes) > 0:
-            if(sorted_queue_processes[0].arrival == counter):
+            if(sorted_queue_processes[0].arrival <= counter):
                 for i in range(sorted_queue_processes[0].time):
                     gantt_chart.add(sorted_queue_processes[0])
                     counter += 1
