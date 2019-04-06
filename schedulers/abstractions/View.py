@@ -70,10 +70,10 @@ class MainWindow(Gtk.Grid):
         self.process_name_input.set_text('Process Name')
 
         self.process_time_input = Gtk.Entry()
-        self.process_time_input.set_text('Process Time')
+        self.process_time_input.set_text('4')
 
         self.process_arrival_input = Gtk.Entry()
-        self.process_arrival_input.set_text('Process Arrival Time')
+        self.process_arrival_input.set_text('1')
 
         first_row.pack_start(self.process_name_input, True, True, 0)
         first_row.pack_start(self.process_time_input, True, True, 0)
