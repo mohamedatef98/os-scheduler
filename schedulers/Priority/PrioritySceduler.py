@@ -5,7 +5,7 @@ class PriorityScheduler (Scheduler):
     def __init__(self, queue):
         self.queue = queue
 
-    def schedule(self):
+    def schedule(self ,preemptive):
         counter = 0
         sorted_queue_processes = sorted(self.queue.processes, key=lambda k: k.arrival)
         gantt_chart = Gantt_Chart()

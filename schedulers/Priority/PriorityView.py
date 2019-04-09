@@ -20,7 +20,7 @@ class PriorityMainWindow(MainWindow):
 
 	def schedule(self, widget):
 		scheduler = PriorityScheduler(self.queue)
-		gantt_chart = scheduler.schedule()
+		gantt_chart = scheduler.schedule(self.preemptive.get_active())
 		self.draw_gantt(gantt_chart)
 		
 	#overwrites
