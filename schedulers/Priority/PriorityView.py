@@ -11,8 +11,8 @@ class PriorityMainWindow(MainWindow):
 		results_box = Gtk.Box()
 		results_box.set_border_width(4)
 
-		preemptive = Gtk.CheckButton(("Preemptive"))
-		results_box.add(preemptive)
+		self.preemptive = Gtk.CheckButton(("Preemptive"))
+		results_box.add(self.preemptive)
 
 		self.attach(results_box, 1, 0, 1, 1)
 
