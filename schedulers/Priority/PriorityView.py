@@ -4,6 +4,7 @@ from gi.repository import Gtk
 
 from ..abstractions.View import MainWindow
 from .PrioritySceduler import PriorityScheduler
+from processes.PriorityProcess import PriorityProcess
 
 class PriorityMainWindow(MainWindow):
 	def __init__(self, main_window):
@@ -77,7 +78,24 @@ class PriorityMainWindow(MainWindow):
 		third_row.pack_start(self.validations, True, True, 0)
 
 		self.dialog.show_all()
-
-
+		
+	def validate(self, widget):
+		process_name = self.process_name_input.get_text()
+		process_time = self.process_time_input.get_text()
+		process_arrival = self.process_arrival_input.get_text()
+		process_priority = self.process_Priority.get_text()
+		try:
+		    process_time = int(process_time)
+		    process_arrival = int(process_arrival)
+		    process_priority = int(process_priority)
+		    if(process_arrival < 0 and process_time < 0 and process_name is ''):
+		        raise Exception('')
+			
+		    self.queue.addProcess(PriorityProcess(process_name, process_arrival, process_time,process_priority))
+		except Exception as e:
+		    self.validations.set_label('The Process Name is Required, and the process arrival and Time should be non-negative integers')
+		else:
+		    self.cancel(widget)
+		    self.draw_queue()
 
 
