@@ -6,10 +6,6 @@ import copy
 
 class SJFScheduler (Scheduler):
 
-	def __init__(self, queue):
-
-		self.queue = queue
-
 	def schedule(self ,preemptive):
 	
 				
@@ -45,6 +41,8 @@ class SJFScheduler (Scheduler):
 						interrupt = True
 				if interrupt & preemptive:
 					break;
+				#calculate avg waiting time for current time slice
+				self.avgWait += self.getWaitingProcNum(sorted_queue_processes, counter)/len(self.queue.processes)
 					
 				gantt_chart.add(sorted_queue_processes[PIndex])
 				sorted_queue_processes[PIndex].time -= 1

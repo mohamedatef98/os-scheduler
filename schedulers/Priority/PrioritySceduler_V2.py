@@ -4,10 +4,6 @@ from .sort_priority import sort_priority1,FCFS_sort_priority
 import copy
 
 class PriorityScheduler (Scheduler):
-    
-	def __init__(self, queue):
-
-		self.queue = queue
 
 	def schedule(self ,preemptive):
 	
@@ -45,6 +41,9 @@ class PriorityScheduler (Scheduler):
 							interrupt = True
 					if  interrupt:
 						break;
+				
+				#calculate avg waiting time for current time slice
+				self.avgWait += self.getWaitingProcNum(sorted_queue_processes, counter)/len(self.queue.processes)
 					
 				gantt_chart.add(sorted_queue_processes[PIndex])
 				sorted_queue_processes[PIndex].time -= 1

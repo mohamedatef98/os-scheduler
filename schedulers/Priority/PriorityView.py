@@ -30,6 +30,7 @@ class PriorityMainWindow(MainWindow):
 		scheduler = PriorityScheduler(self.queue)
 		gantt_chart = scheduler.schedule(self.preemptive.get_active())
 		self.draw_gantt(gantt_chart)
+		self.setWaitingTime(scheduler.avgWait)
 		
 	#overwrites
 	def add_process_dialog(self, widget):
@@ -112,4 +113,5 @@ class PriorityMainWindow(MainWindow):
 			t = str(process.name) + " /// " + str(process.arrival) + " /// " + str(process.time) + " /// " + str(process.priority)
 			self.process_lines.add(Gtk.Label(t))
 			self.process_lines.show_all()
+
 

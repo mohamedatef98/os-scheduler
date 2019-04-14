@@ -4,8 +4,8 @@ from gi.repository import Gtk
 
 from ..abstractions.View import MainWindow
 from .RRSceduler import RRScheduler
-from .RRSceduler import RRScheduler
 from ..abstractions.NumberEntry import NumberEntry
+from processes.NormalProcess import NormalProcess
 
 class RRMainWindow(MainWindow):
 	def __init__(self, main_window):
@@ -17,6 +17,14 @@ class RRMainWindow(MainWindow):
 		results_box.add(self.process_Quantum_input)
 
 		self.attach(results_box, 1, 0, 1, 1)
+
+		#'''
+		#for debug
+		self.queue.addProcess(NormalProcess("a", 0, 5))
+		self.queue.addProcess(NormalProcess("b", 1, 5))
+		self.queue.addProcess(NormalProcess("c", 3, 3))
+		self.draw_queue()
+		#'''
 
 	def schedule(self, widget):
 		scheduler = RRScheduler(self.queue)
