@@ -46,6 +46,10 @@ class MainWindow(Gtk.Grid):
         self.attach(self.gantt_chart_box, 0, 1, 3, 1)
 
 
+        self.waitTimelabel = Gtk.Label()
+        self.waitTimelabel.set_text("Average Waiting Time: ")
+        self.attach(self.waitTimelabel, 0, 2, 3, 1)
+
     def add_process_dialog(self, widget):
         self.dialog = Gtk.Dialog('Add Process', self.main_window)
         dialog_main_window = self.dialog.get_content_area()
@@ -70,10 +74,10 @@ class MainWindow(Gtk.Grid):
         self.process_name_input.set_text('Process Name')
 
         self.process_time_input = Gtk.Entry()
-        self.process_time_input.set_text('4')
+        self.process_time_input.set_text('Process Time')
 
         self.process_arrival_input = Gtk.Entry()
-        self.process_arrival_input.set_text('1')
+        self.process_arrival_input.set_text('Process Arrival')
 
         first_row.pack_start(self.process_name_input, True, True, 0)
         first_row.pack_start(self.process_time_input, True, True, 0)
@@ -144,5 +148,6 @@ class MainWindow(Gtk.Grid):
             self.gantt_chart_box.add(l)
             self.gantt_chart_box.show_all()
 
-
+    def setWaitingTime(self, waitTime):
+        self.waitTimelabel.set_text("Average Waiting Time: " + str(waitTime))
 
