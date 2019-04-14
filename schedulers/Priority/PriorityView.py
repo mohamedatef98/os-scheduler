@@ -3,7 +3,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 from ..abstractions.View import MainWindow
-from .PrioritySceduler import PriorityScheduler
+from .PrioritySceduler_V2 import PriorityScheduler
 from processes.PriorityProcess import PriorityProcess
 
 class PriorityMainWindow(MainWindow):
@@ -16,8 +16,15 @@ class PriorityMainWindow(MainWindow):
 		results_box.add(self.preemptive)
 
 		self.attach(results_box, 1, 0, 1, 1)
-
-
+		'''
+		#for debug
+		self.queue.addProcess(PriorityProcess("p0", 0, 5,5))
+		self.queue.addProcess(PriorityProcess("p1", 1, 5,4))
+		self.queue.addProcess(PriorityProcess("p2", 1, 5,3))
+		self.queue.addProcess(PriorityProcess("p3", 3, 5,2))
+		self.queue.addProcess(PriorityProcess("p4", 3, 5,1))
+		self.draw_queue()
+		'''
 
 	def schedule(self, widget):
 		scheduler = PriorityScheduler(self.queue)
@@ -98,4 +105,11 @@ class PriorityMainWindow(MainWindow):
 		    self.cancel(widget)
 		    self.draw_queue()
 
+	def draw_queue(self):
+		for child in self.process_lines.get_children():
+			self.process_lines.remove(child)
+		for process in self.queue.processes:
+			t = str(process.name) + " /// " + str(process.arrival) + " /// " + str(process.time) + " /// " + str(process.priority)
+			self.process_lines.add(Gtk.Label(t))
+			self.process_lines.show_all()
 
