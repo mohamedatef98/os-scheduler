@@ -3,12 +3,10 @@ from gantt_chart.gantt_chart import Gantt_Chart
 from queue.queue import Queue
 
 class RRScheduler (Scheduler):
-	def __init__(self, queue):
-		self.queue = queue
 
-	def schedule(self, quantum_std):
+	def schedule(self,process_Quantum_input , quantum_std):
 		counter = 0
-		#quantum_std = int(self.process_Quantum_input)
+		#quantum_std = process_Quantum_input
 		finished = False
 		new_ip = False
 		index = 0
@@ -39,7 +37,6 @@ class RRScheduler (Scheduler):
 							break
 					# ============= index overwrite ===================
 					if(new_ip == True and counter > 0):
-						old_index = 0 #init old_index
 						if(size_change == False):
 							index = old_index+1
 						else:
@@ -68,10 +65,14 @@ class RRScheduler (Scheduler):
 				# ============= view section	 ==============
 				if(finished == True):
 					for j in range(quantum[index]):
+						#calculate avg waiting time for current time slice
+						self.avgWait += self.getWaitingProcNum(sorted_queue_processes, counter)/len(self.queue.processes)
 						gantt_chart.add(subarrayRR[index])
 						counter += 1
 				else:
 					for j in range(quantum_std):
+						#calculate avg waiting time for current time slice
+						self.avgWait += self.getWaitingProcNum(sorted_queue_processes, counter)/len(self.queue.processes)
 						gantt_chart.add(subarrayRR[index])
 						counter += 1
 				# ============= view section end ==============
@@ -94,7 +95,7 @@ class RRScheduler (Scheduler):
 				
 				print("index = ",index)
 				# ==============   index update end =================
-				if(len(subarrayRR)==0):
+				if(len(subarrayRR)==0 and len(quantum)==0):
 					break
 
 

@@ -28,7 +28,7 @@ class RRMainWindow(MainWindow):
 
 	def schedule(self, widget):
 		scheduler = RRScheduler(self.queue)
-		gantt_chart = scheduler.schedule(int(self.process_Quantum_input.get_text()))
+		gantt_chart = scheduler.schedule(int(self.process_Quantum_input.get_text()) ,int(self.process_Quantum_input.get_text()))
 		self.draw_gantt(gantt_chart)
-		
+		self.setWaitingTime(scheduler.avgWait)
 	

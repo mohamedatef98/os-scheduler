@@ -101,6 +101,10 @@ class MainWindow(Gtk.Grid):
 
         self.dialog.show_all()
 
+    def remove_process(self, widget, *data):
+        process_id = data[0]
+        self.queue.processes.pop(process_id)
+        self.draw_queue()
 
     def cancel(self, widget):
         self.dialog.close()
@@ -126,10 +130,15 @@ class MainWindow(Gtk.Grid):
     def draw_queue(self):
         for child in self.process_lines.get_children():
             self.process_lines.remove(child)
+
+        process_id = 0
         for process in self.queue.processes:
             t = str(process.name) + " /// " + str(process.arrival) + " /// " + str(process.time)
-            self.process_lines.add(Gtk.Label(t))
+            remove_process = Gtk.Button(t)
+            remove_process.connect('clicked', self.remove_process, process_id)
+            self.process_lines.add(remove_process)
             self.process_lines.show_all()
+            process_id += 1
 
 
     def schedule(self, widget):
@@ -150,4 +159,3 @@ class MainWindow(Gtk.Grid):
 
     def setWaitingTime(self, waitTime):
         self.waitTimelabel.set_text("Average Waiting Time: " + str(waitTime))
-
