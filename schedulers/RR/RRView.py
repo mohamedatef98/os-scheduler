@@ -18,13 +18,13 @@ class RRMainWindow(MainWindow):
 
 		self.attach(results_box, 1, 0, 1, 1)
 
-		#'''
+		'''
 		#for debug
 		self.queue.addProcess(NormalProcess("a", 0, 5))
 		self.queue.addProcess(NormalProcess("b", 1, 5))
 		self.queue.addProcess(NormalProcess("c", 3, 3))
 		self.draw_queue()
-		#'''
+		'''
 
 	def schedule(self, widget):
 		scheduler = RRScheduler(self.queue)
