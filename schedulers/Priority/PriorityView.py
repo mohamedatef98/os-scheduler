@@ -93,25 +93,28 @@ class PriorityMainWindow(MainWindow):
 		process_arrival = self.process_arrival_input.get_text()
 		process_priority = self.process_Priority.get_text()
 		try:
-		    process_time = int(process_time)
-		    process_arrival = int(process_arrival)
-		    process_priority = int(process_priority)
-		    if(process_arrival < 0 and process_time < 0 and process_name is ''):
-		        raise Exception('')
+			process_time = int(process_time)
+			process_arrival = int(process_arrival)
+			process_priority = int(process_priority)
+			if(process_arrival < 0 and process_time < 0 and process_name is ''):
+				raise Exception('')
 			
-		    self.queue.addProcess(PriorityProcess(process_name, process_arrival, process_time,process_priority))
+			self.queue.addProcess(PriorityProcess(process_name, process_arrival, process_time,process_priority))
 		except Exception as e:
-		    self.validations.set_label('The Process Name is Required, and the process arrival and Time should be non-negative integers')
+			self.validations.set_label('The Process Name is Required, and the process arrival and Time should be non-negative integers')
 		else:
-		    self.cancel(widget)
-		    self.draw_queue()
+			self.cancel(widget)
+			self.draw_queue()
 
 	def draw_queue(self):
 		for child in self.process_lines.get_children():
 			self.process_lines.remove(child)
+		process_id = 0
 		for process in self.queue.processes:
 			t = str(process.name) + " /// " + str(process.arrival) + " /// " + str(process.time) + " /// " + str(process.priority)
-			self.process_lines.add(Gtk.Label(t))
+			remove_process = Gtk.Button(t)
+			remove_process.connect('clicked', self.remove_process, process_id)
+			self.process_lines.add(remove_process)
 			self.process_lines.show_all()
-
+			process_id += 1
 

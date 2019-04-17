@@ -1,6 +1,8 @@
 from ..abstractions.Scheduler import Scheduler
 from gantt_chart.gantt_chart import Gantt_Chart
 from queue.queue import Queue
+import copy
+
 
 class RRScheduler (Scheduler):
 
@@ -13,7 +15,8 @@ class RRScheduler (Scheduler):
 		subarrayRR = []
 		k = 0
 		size_change = False
-		sorted_queue_processes = sorted(self.queue.processes, key=lambda k: k.arrival)
+		queuCopy = copy.deepcopy(self.queue.processes)
+		sorted_queue_processes = sorted(queuCopy, key=lambda k: k.arrival)	
 		quantum =[None]*len(sorted_queue_processes)
 		gantt_chart = Gantt_Chart()
 		end = len(sorted_queue_processes)
